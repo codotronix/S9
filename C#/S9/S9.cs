@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace S9_CSharp
@@ -13,26 +14,30 @@ namespace S9_CSharp
         List<UserVar> allUserVars = new List<UserVar>();
 
         //private constructor
-        private S9 (String src) {
+        private S9(String src)
+        {
             this.source = src;
         }
 
         //I want atmost 1 instance of this class to be running at any time
-        public static S9 getS9(String src) {
-            if (S9.s9Instance == null) {
+        public static S9 getS9(String src)
+        {
+            if (S9.s9Instance == null)
+            {
                 S9.s9Instance = new S9(src);
             }
             return S9.s9Instance;
         }
 
-        public void init() {
+        public void init()
+        {
             //Console.WriteLine(this.source);
             extractStrings();
-
+            removeCommentsAndSpaces();
             Console.WriteLine(source);
 
-            Console.WriteLine(allUserVars[2].value);
-            
+            //Console.WriteLine(allUserVars[2].value);
+
         }
 
         void extractStrings()
@@ -43,17 +48,21 @@ namespace S9_CSharp
             var singleQuoteOpen = false;
             var stringVarNum = 0;
             StringBuilder stringVarValue = new StringBuilder();
-             
+
             var prevChar = 'x';
 
-            foreach (var i in source) 
-            {            
+            foreach (var i in source)
+            {
                 //when a double " is opening a quote
-                if (i == '"' && prevChar != '\\' && !singleQuoteOpen) {              
-                    if (!doubleQuoteOpen) {
+                if (i == '"' && prevChar != '\\' && !singleQuoteOpen)
+                {
+                    if (!doubleQuoteOpen)
+                    {
                         doubleQuoteOpen = true;
                         stringVarNum++;
-                    } else {
+                    }
+                    else
+                    {
                         doubleQuoteOpen = false;
                         var varName = "____stringVar_____" + stringVarNum;
                         var stringVar = new UserVar();
@@ -62,14 +71,18 @@ namespace S9_CSharp
                         stringVar.type = "txt";
                         allUserVars.Add(stringVar);
                         stringVarValue.Clear();
-                        modifiedSource.Append(" " + varName + " "); 
-                    }                
-                } 
-                else if (i == '\'' && prevChar != '\\' && !doubleQuoteOpen) {                
-                    if (!singleQuoteOpen) {
+                        modifiedSource.Append(" " + varName + " ");
+                    }
+                }
+                else if (i == '\'' && prevChar != '\\' && !doubleQuoteOpen)
+                {
+                    if (!singleQuoteOpen)
+                    {
                         singleQuoteOpen = true;
                         stringVarNum++;
-                    } else {
+                    }
+                    else
+                    {
                         singleQuoteOpen = false;
                         var varName = "____stringVar_____" + stringVarNum;
                         var stringVar = new UserVar();
@@ -79,12 +92,16 @@ namespace S9_CSharp
                         allUserVars.Add(stringVar);
                         stringVarValue.Clear();
                         modifiedSource.Append(" " + varName + " ");
-                    }                
-                } 
-                else {
-                    if (doubleQuoteOpen || singleQuoteOpen) {
+                    }
+                }
+                else
+                {
+                    if (doubleQuoteOpen || singleQuoteOpen)
+                    {
                         stringVarValue.Append(i);
-                    } else {
+                    }
+                    else
+                    {
                         modifiedSource.Append(i);
                     }
                 }
@@ -92,6 +109,14 @@ namespace S9_CSharp
             }
 
             source = modifiedSource.ToString();
+        }
+
+        void removeCommentsAndSpaces() 
+        {
+            //replace all strings
+            String matchPattern = @"\/\*(.*)\*\/|\/\/(.*)";
+            String replacementPattern = @"";
+            source = Regex.Replace(source, matchPattern, replacementPattern);
         }
     }
 }
