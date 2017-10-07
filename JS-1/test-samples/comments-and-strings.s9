@@ -1,0 +1,15 @@
+/*
+    This is a comment, 
+    This should be ignored by the S9 interpreter
+*/
+
+ string name = "Suman Barick";          //Line comment - hmmm tricky
+
+ string tricky = "This is tricky because this states that /* is a comment starter and also ends with */";
+
+ string tricky2 = "This string says a double comment must start with //"
+
+ num a, b = 4 + 5, c = 18, d = 15;
+
+ //This is end comment with a string inside - "end comment"
+ //A single line comment

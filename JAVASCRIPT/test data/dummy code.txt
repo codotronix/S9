@@ -1,7 +1,0 @@
-var n1 = 'Hello Boy'; /* This a comment */
-var n2 = 'hello girl';
-var n3 = "I'm a boy.../* this should not be removed*/ ";
-var n4 = 'She\'s a girl'; /**another comment**/
-print("something") //This will print
-//This comment should also be removed
-

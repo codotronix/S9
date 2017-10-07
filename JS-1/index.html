@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Snine</title>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+
+    <div class="container-fluid main-container">
+
+        <!-- SRC -->
+        <div class="col-xs-12 margin-top-15">
+            <label class="">Source</label>
+            <textarea id="src-code" class="form-control height-150"></textarea>
+            <button type="button" id="interpret" class="btn btn-primary margin-top-5">Interpret</button>
+        </div>
+
+        <!-- Comment and String Identified SRC -->
+        <div class="col-xs-12 margin-top-15">
+            <label class="">Comment and String Identified Source</label>
+            <textarea id="comment-string-identified-code" class="form-control height-150"></textarea>
+        </div>
+
+        <!-- Comment free SRC -->
+        <div class="col-xs-12 margin-top-15">
+            <label class="">Comments Removed</label>
+            <textarea id="comment-free-code" class="form-control height-150"></textarea>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="lib/js/jquery.js"></script>
+    <script type="text/javascript" src="js/S9/modules.js"></script>
+    <script type="text/javascript" src="js/S9/codeCleanupModule.js"></script>
+    <script type="text/javascript" src="js/S9/interpreterModule.js"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>

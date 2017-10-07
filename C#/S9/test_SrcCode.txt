@@ -1,3 +1,0 @@
-txt a = 'I am a Boy';
-txt b = "She's a girl";
-txt c = 'I\'m Superman...';
